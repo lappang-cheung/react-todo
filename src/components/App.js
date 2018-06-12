@@ -14,6 +14,41 @@ class App extends Component{
     }
 
     /*
+        1. Create a json string
+        2. Add the itemList array into local storage
+    */
+    componentDidUpdate(){
+        const json = JSON.stringify(this.state.itemList);
+        const track = JSON.stringify(this.state.task);
+        localStorage.setItem('itemList', json);
+        localStorage.setItem('task', json)
+    }
+
+    /*
+        1. Try - Catch for the localStorage for task & itemList array
+        2. Check if the task is not null then set the state for the task
+        3. Check if the itemList is not null then set the state for the array
+    */
+    componentDidMount(){
+        try{
+            const json = localStorage.getItem('itemList');
+            const track = localStorage.getItem('task');
+            const itemList = JSON.parse(json);
+            const task = JSON.parse(track);
+
+            if(task){
+                this.setState({task})
+            }
+
+            if(itemList){
+                this.setState({itemList})
+            }
+        }catch(e){
+            // Do nothing
+        }
+    }
+
+    /*
         1. Getting the value input from the user
     */
     onChange = (event) => {
