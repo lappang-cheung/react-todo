@@ -6,18 +6,43 @@ import TodoList from './TodoList';
 
 class App extends Component{
 
+    // New way without writing out super and constructor
     state = {
-        task: 0,
         item: '',
-        itemList:[]
+        itemList:[],
+        task: 0
     }
 
+    /*
+        1. Getting the value input from the user
+    */
     onChange = (event) => {
         this.setState({
             item: event.target.value
         })
     }
 
+    /*
+        1. Gets the previous state of the array
+        2. Filter the array for the remove item
+        3. Checks if remove item
+        4. Subtract the task count if task removed
+    */
+    onDeleteInput = (removeItem) => {
+        this.setState((prevState) =>({
+            itemList: prevState.itemList.filter((item) => {
+                return removeItem !== item
+            })
+        ,
+            task: this.state.task - 1
+        })) 
+    }
+
+    /*
+        1. Resetting the item to empty string after click
+        2. Storing the item into itemList array
+        3. Updating the count for the task created
+    */
     onAddInput = () => {
         this.setState({
             item: '',
@@ -45,6 +70,7 @@ class App extends Component{
                 <TodoList
                     task={this.state.task}
                     itemList={this.state.itemList}
+                    onDeleteInput={this.onDeleteInput}
                 />
             </div>
         )

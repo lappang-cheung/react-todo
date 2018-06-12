@@ -1,16 +1,23 @@
 import React from 'react';
 
 import TodoView from './TodoView';
-
+// Multiple task view items
 const TodoList = props => {
 
-    const { task, itemList } = props;
+    // Destructuring the props for certain items
+    const { task, itemList, onDeleteInput } = props;
 
     return(
         <ul>
-            {
+            {   
+                // Mapping the array of task
                 itemList.map((item, index) => 
-                    <TodoView index={index} item={item}/>
+                    <TodoView 
+                        key={index}
+                        index={index} 
+                        item={item} 
+                        onDeleteInput={onDeleteInput}
+                    />
                 )
             }
         </ul>
