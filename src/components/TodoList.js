@@ -5,7 +5,7 @@ import TodoView from './TodoView';
 const TodoList = props => {
 
     // Destructuring the props for certain items
-    const { task, itemList, onDeleteInput } = props;
+    const { itemList, onDeleteInput } = props;
 
     return(
         <ul>

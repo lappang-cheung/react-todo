@@ -9,8 +9,7 @@ class App extends Component{
     // New way without writing out super and constructor
     state = {
         item: '',
-        itemList:[],
-        task: 0
+        itemList:[]
     }
 
     /*
@@ -19,30 +18,21 @@ class App extends Component{
     */
     componentDidUpdate(){
         const json = JSON.stringify(this.state.itemList);
-        const track = JSON.stringify(this.state.task);
         localStorage.setItem('itemList', json);
-        localStorage.setItem('task', json)
     }
 
     /*
         1. Try - Catch for the localStorage for task & itemList array
-        2. Check if the task is not null then set the state for the task
-        3. Check if the itemList is not null then set the state for the array
+        2. Check if the itemList is not null then set the state for the array
     */
     componentDidMount(){
         try{
             // Holding the data from the local storage
             const json = localStorage.getItem('itemList');
-            const track = localStorage.getItem('task');
 
             // Storing back into JavaScript objects 
             const itemList = JSON.parse(json);
-            const task = JSON.parse(track);
 
-            // Check if task is null
-            if(task){
-                this.setState({task})
-            }
             // Check if itemList is null
             if(itemList){
                 this.setState({itemList})
@@ -65,28 +55,23 @@ class App extends Component{
         1. Gets the previous state of the array
         2. Filter the array for the remove item
         3. Checks if remove item
-        4. Subtract the task count if task removed
     */
     onDeleteInput = (removeItem) => {
         this.setState((prevState) =>({
             itemList: prevState.itemList.filter((item) => {
                 return removeItem !== item
             })
-        ,
-            task: this.state.task - 1
         })) 
     }
 
     /*
         1. Resetting the item to empty string after click
         2. Storing the item into itemList array
-        3. Updating the count for the task created
     */
     onAddInput = () => {
         this.setState({
             item: '',
-            itemList: [...this.state.itemList, this.state.item],
-            task: this.state.task + 1
+            itemList: [...this.state.itemList, this.state.item]
         })
     }
 
@@ -100,14 +85,12 @@ class App extends Component{
                     onChange={this.onChange}
                     onAddInput={this.onAddInput}
                 />
-                {/* Counter component for total task remaining */}
+                {/* Counter component for total task  */}
                 <Counter 
-                    task={this.state.task} 
                     itemList={this.state.itemList}
                 />
                 {/* To display the items add onto the task list */}
                 <TodoList
-                    task={this.state.task}
                     itemList={this.state.itemList}
                     onDeleteInput={this.onDeleteInput}
                 />

@@ -2,10 +2,10 @@ import React from 'react';
 
 const Counter = props => {
 
-    const {itemList, task} = props;
+    const {itemList} = props;
 
     return(
-        <p>You have {task} out of {itemList.length} remaining</p>
+        <p>You have total {itemList.length} task(s)</p>
     )
 }
 
