@@ -31,15 +31,19 @@ class App extends Component{
     */
     componentDidMount(){
         try{
+            // Holding the data from the local storage
             const json = localStorage.getItem('itemList');
             const track = localStorage.getItem('task');
+
+            // Storing back into JavaScript objects 
             const itemList = JSON.parse(json);
             const task = JSON.parse(track);
 
+            // Check if task is null
             if(task){
                 this.setState({task})
             }
-
+            // Check if itemList is null
             if(itemList){
                 this.setState({itemList})
             }
