@@ -11,7 +11,7 @@ There are three version of this application:
 ## Table of Contents
 - [Installation of App](#installation-of-app)
 - [Adding Local Storage](#adding-local-storage)
-- [Adding componentDidUpdate](#adding-componentDidUpdate)
+- [Adding componentDidUpdate](#adding-componentdidupdate)
 - [Adding componentDidMount](#adding-componentDidMount)
 - [Bonus Strikethrough](#bonus-strikethrough)
 
