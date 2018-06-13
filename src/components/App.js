@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 // Custom classes
 import Counter from './Counter';
@@ -14,36 +15,6 @@ class App extends Component{
     state = {
         item: '',
         itemList:[]
-    }
-
-    /*
-        1. Create a json string
-        2. Add the itemList array into local storage
-    */
-    componentDidUpdate(){
-        const json = JSON.stringify(this.state.itemList);
-        localStorage.setItem('itemList', json);
-    }
-
-    /*
-        1. Try - Catch for the localStorage for task & itemList array
-        2. Check if the itemList is not null then set the state for the array
-    */
-    componentDidMount(){
-        try{
-            // Holding the data from the local storage
-            const json = localStorage.getItem('itemList');
-
-            // Storing back into JavaScript objects 
-            const itemList = JSON.parse(json);
-
-            // Check if itemList is null
-            if(itemList){
-                this.setState({itemList})
-            }
-        }catch(e){
-            // Do nothing
-        }
     }
 
     /*
