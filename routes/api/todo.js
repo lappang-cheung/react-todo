@@ -18,6 +18,16 @@ router.post('/new', (req,res) => {
 
     todo.save()
         .then(todo => res.json(todo))
-})
+});
+
+// @route   Get api/todos
+// @desc    Get posts
+// @access  Pulic
+router.get('/', (req,res) => {
+    Todo.find()
+        .sort({date: -1})
+        .then(todos => res.json(todos))
+        .catch(err => res.status(404));
+});
 
 module.exports = router;
