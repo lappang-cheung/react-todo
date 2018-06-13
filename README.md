@@ -12,7 +12,7 @@ There are three version of this application:
 - [Installation of App](#installation-of-app)
 - [Adding Local Storage](#adding-local-storage)
 - [Adding componentDidUpdate](#adding-componentdidupdate)
-- [Adding componentDidMount](#adding-componentDidMount)
+- [Adding componentDidMount](#adding-componentdidmount)
 - [Bonus Strikethrough](#bonus-strikethrough)
 
 ## Installation of App
@@ -124,3 +124,98 @@ componentDidUpdate(){
     }
 }
 ~~~~
+
+## Bonus Strikethrough
+
+A bonus feature, if an user want to strike out or unstrike out the task to show the progression of the task(s).
+
+Modify the stateless component to stateful component on TodoView.js file
+
+1. Import { Component } from the react
+
+~~~~
+import React from 'react';
+~~~~
+
+to
+
+~~~~
+import React, {Component} from 'react'
+~~~~
+
+2. Change from const into class and extends the component
+
+~~~~
+const TodoView = props => {
+    // Some code
+}
+
+export default TodoView;
+~~~~
+
+to
+
+~~~~
+class TodoView extends Component{
+    //Some code
+}
+
+export default TodoView;
+~~~~
+
+3. Erase the const { .... } = props declaration as no longer needed
+
+~~~~
+const TodoView = props => {
+    const { index, item, onDeleteInput } = props;
+    // Some code
+}
+
+export default TodoView;
+~~~~
+
+to
+
+~~~~
+class TodoView extends Component{
+    //Some code
+}
+
+export default TodoView;
+~~~~
+
+4. Add this.props.<name> to those previous declare as a prop
+
+~~~~
+return(
+    <span>
+        <li key={index}>{item}</li>
+        <button onClick={(e) => {
+            onDeleteInput(item)
+        }}>Remove</button>
+    </span>
+~~~~
+
+to
+
+~~~~
+render(){
+    return(
+        <span>
+            <li 
+                key={this.props.index}
+            >
+                {this.props.item}
+            </li>
+            <button onClick={(e) => {
+                this.props.onDeleteInput(this.props.item)
+            }}>Remove</button>
+        </span>
+        )
+    }
+~~~~
+
+5. Create a new state just for this class only as a boolean of false
+6. Create the strike through method
+7. On the li element, check if the boolean value is true or false then apply a css class
+8. Add the strike through method to onClick  
