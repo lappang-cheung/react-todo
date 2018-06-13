@@ -30,7 +30,7 @@ If failed to use yarn then use the following:
 
 ## Adding Local Storage
 
-In order to install local storage we need to modify the App.js from:
+In order to use local storage we need to modify the App.js from:
 
 ~~~~
 state = {
@@ -53,6 +53,53 @@ onDeleteInput = (removeItem) => {
 }
 ~~~~
 
+to
+
+~~~~
+state = {
+        item: '',
+        itemList:[]
+    }
+
+/* Added */
+componentDidUpdate(){
+
+}
+
+/* Added 8?
+componentDidMount(){
+
+}
+
+onChange = (event) => {
+        this.setState({
+            item: event.target.value
+        })
+}
+
+onDeleteInput = (removeItem) => {
+    this.setState((prevState) =>({
+        itemList: prevState.itemList.filter((item) => {
+                return removeItem !== item
+        })
+    })) 
+}
+~~~~
+
+
 ## Adding componentDidUpdate
+
+In componentDidUpdate we need to convert the JavaScript into a string in order to use the localStorage since it stores everything as a string.
+
+1. Declare a variable to store the string version of the JavaScript Object
+2. Use localStorage setItem method to store the string
+
+~~~~
+componentDidUpdate(){
+    const json = JSON.stringify(this.state.itemList);
+    localStorage.setItem('itemList', json);
+}
+~~~~
+
 
 ## Aadding componentDidMount
