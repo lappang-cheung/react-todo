@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 
+// Custom classes
 import Counter from './Counter';
 import Todo from './Todo';
 import TodoList from './TodoList';
+
+// Custom styles
+import '../styles/App.css';
 
 class App extends Component{
 
