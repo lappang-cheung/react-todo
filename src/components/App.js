@@ -18,19 +18,15 @@ class App extends Component{
     }
 
     /*
-        1. 
+        1. Use axios to grab the api call for all tasks
+        2. Set the state of the itemList to hold all tasks items
     */
     componentDidMount(){
         axios.get("/todo")
-        .then(res => {
-            
+        .then(res => {      
             this.setState({
                 itemList: res.data
             })
-            
-            // if(res.data.itemList){
-            //     this.setState({ itemList: res.data.itemList })
-            // }
         })
     }
 
