@@ -23,8 +23,11 @@ class App extends Component{
     componentDidMount(){
         axios.get("/todo")
         .then(res => {
-            const itemList = res.data;
+            console.log(res.data)
             
+            this.setState({
+                itemList: res.data
+            })
             
             // if(res.data.itemList){
             //     this.setState({ itemList: res.data.itemList })
