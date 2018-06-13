@@ -50,9 +50,24 @@ NPM installation
 ~~~~~
 npm install --save axios express mongoose nodemon concurrently
 ~~~~~
+
 4. In "server.js" declare the variables, port and basic routes
 
+//server.js
+~~~~~
+const express = require('express');
+const PORT = process.env.PORT || 5000;
 
+const app = express();
+
+app.get('/', (req,res) => {
+    res.send('Hello world')
+})
+
+app.listen(PORT, () => {
+    console.log('Listening to port: ${PORT}`)
+})
+~~~~~
 
 ## Adding MongoDB Storage
 
