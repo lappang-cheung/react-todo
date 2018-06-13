@@ -18,6 +18,21 @@ class App extends Component{
     }
 
     /*
+        1. 
+    */
+    componentDidMount(){
+        axios.get("/todo")
+        .then(res => {
+            const itemList = res.data;
+            
+            
+            // if(res.data.itemList){
+            //     this.setState({ itemList: res.data.itemList })
+            // }
+        })
+    }
+
+    /*
         1. Getting the value input from the user
     */
     onChange = (event) => {
@@ -44,6 +59,9 @@ class App extends Component{
         2. Storing the item into itemList array
     */
     onAddInput = () => {
+
+
+        
         this.setState({
             item: '',
             itemList: [...this.state.itemList, this.state.item]
