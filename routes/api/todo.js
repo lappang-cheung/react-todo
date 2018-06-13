@@ -11,7 +11,8 @@ router.get('/test', (req,res) => res.json({msg: "To do works"}));
 // @route   POST api/todos
 // @desc    Create post
 // @access  Public
-router.post('/:todo', (req,res) => {
+router.post('/new', (req,res) => {
+    console.log(req.body)
     const todo = new Todo({
         description: req.body.text
     });

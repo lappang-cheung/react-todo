@@ -17,17 +17,21 @@ class App extends Component{
         itemList:[]
     }
 
-    /*
-        1. Use axios to grab the api call for all tasks
-        2. Set the state of the itemList to hold all tasks items
-    */
-    componentDidMount(){
+    refresh = () =>{
         axios.get("/todo")
         .then(res => {      
             this.setState({
                 itemList: res.data
             })
         })
+    }
+
+    /*
+        1. Use axios to grab the api call for all tasks
+        2. Set the state of the itemList to hold all tasks items
+    */
+    componentDidMount(){
+        this.refresh()
     }
 
     /*
@@ -40,19 +44,20 @@ class App extends Component{
     }
 
     /*
-        1. Gets the previous state of the array
-        2. Filter the array for the remove item
-        3. Checks if remove item
+        1. Grabs the id from removeItem parameter
+        2. Axios calls the route to delete the from database
+        3. Checks for errors and display if there is one
     */
     onDeleteInput = (removeItem) => {
-        console.log(removeItem._id)
         axios.delete(`/todo/${removeItem._id}`)
             .then(res => {
                 console.log('Comment Deleted');
+                this.refresh();
             })
             .catch(err => {
                 console.log(err);
             })
+
         // this.setState((prevState) =>({
         //     itemList: prevState.itemList.filter((item) => {
         //         return removeItem !== item
@@ -66,13 +71,22 @@ class App extends Component{
     */
     onAddInput = () => {
 
-        axios.post(`/todo/${this.state.item}`, {description: this.state.item})
-            .then(res => console.log(res))
+        // console.log('Pressed')
+        // console.log(this.state.item)
+        // this.setState({
+        //     item: ''
+        // })
+
+        axios.post('todo/new', {
+            text: 'Test me'
+        }).then(res => console.log(res)).catch(err => console.log(err))
+        this.refresh();
 
         // this.setState({
         //     item: '',
         //     itemList: [...this.state.itemList, this.state.item]
         // })
+
     }
 
     render()
