@@ -13,6 +13,7 @@ There are three version of this application:
 - [Adding Local Storage](#adding-local-storage)
 - [Adding componentDidUpdate](#adding-componentDidUpdate)
 - [Adding componentDidMount](#adding-componentDidMount)
+- [Bonus Strikethrough](#bonus-strikethrough)
 
 ## Installation of App
 
@@ -86,10 +87,9 @@ onDeleteInput = (removeItem) => {
 }
 ~~~~
 
-
 ## Adding componentDidUpdate
 
-In componentDidUpdate we need to convert the JavaScript into a string in order to use the localStorage since it stores everything as a string.
+In componentDidUpdate, we need to convert the JavaScript into a string in order to use the localStorage since it stores everything as a string.
 
 1. Declare a variable to store the string version of the JavaScript Object
 2. Use localStorage setItem method to store the string
@@ -101,5 +101,26 @@ componentDidUpdate(){
 }
 ~~~~
 
+## Adding componentDidMount
 
-## Aadding componentDidMount
+In componentDidMount, we need to get the data back from the local storage and parse back into the JavaScript to be displayed by the React view.
+
+1. Declare a variable to store the string data from local storage
+2. Declare a variable to store the JavaScript object from the parse string data
+3. Check if the JavaScript is null, and if is then do nothing or else set the state of the itemList array
+4. Use try catch statement to ensure no errors
+
+~~~~
+componentDidUpdate(){
+    try{
+        const json = localStorage.getItem('itemList');
+        const itemList = JSON.parse(json);
+
+        if(itemList){
+            this.setState({itemList})
+        }
+    }catch(e){
+        // Do nothing
+    }
+}
+~~~~
