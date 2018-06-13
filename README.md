@@ -1,8 +1,6 @@
-IN PROGRESS
-
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-There are three version of this application:
+There are four version of this application:
 1. Simple and generic with no local storage (Check branch no-storage)
 2. Simple and generic with local storage (Check branch local-storage)
 3. Simple and generic with mongo database (Check branch mongo-storage)
