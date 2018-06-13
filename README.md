@@ -10,17 +10,19 @@ There are four version of this application:
 
 ## Table of Contents
 - [Installation of App](#installation-of-app)
+- [Creating Backend Server](#creating-backend-server)
 - [Adding MongoDB Storage](#adding-mongodb-storage)
-- [Adding componentDidUpdate](#adding-componentdidupdate)
-- [Adding componentDidMount](#adding-componentdidmount)
-- [Bonus Strikethrough](#bonus-strikethrough)
+- [Creating A Model](#creating-a-model)
+- [Modifying componentDidMount](#adding-componentdidmount)
+- [Modifying Delete Task](#modifying-delete-task)
+- [Modifying Add Task](#modifiying-add-task)
 
 ## Installation of App
 
 In order to install the app do the following:
 
 * `yarn install` to install the local packages
-* `yarn start` to run the application
+* `yarn start` to run the application for backend and frontend
 
 Note: Since the remove method is using filters method, any duplication will be erased from the array
 
@@ -29,5 +31,12 @@ If failed to use yarn then use the following:
 * `npm run install`
 * `npm run start`
 
+## Creating Backend Server
+
+
+
+
+
 ## Adding MongoDB Storage
 
+Need to create the 
