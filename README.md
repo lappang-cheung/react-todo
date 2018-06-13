@@ -103,8 +103,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 7. Creating a folder called "config", then inside create a file called "keys.js" and declare the local mongo uri
 
-+-- config
-|   +-- keys.js
++-- _config
+|   +-- _keys.js
 
 keys.js - File
 ~~~~~
