@@ -66,28 +66,28 @@ class App extends Component{
     }
 
     /*
-        1. Resetting the item to empty string after click
-        2. Storing the item into itemList array
+        1. Axios call to the backend route to add input
+        2. Called the refresh method to load the data
+        3. Set the state of the item to clear the input
     */
     onAddInput = () => {
-
-        // console.log('Pressed')
-        // console.log(this.state.item)
-        // this.setState({
-        //     item: ''
-        // })
-
+        // Create the task item with axios route
         axios.post('todo/new', {
-            text: 'Test me'
-        }).then(res => console.log(res)).catch(err => console.log(err))
+            text: this.state.item
+        })
+        .then(
+            res => console.log(res)
+        )
+        .catch(err => console.log(err));
+        // Refresh the view
         this.refresh();
-
-        // this.setState({
-        //     item: '',
-        //     itemList: [...this.state.itemList, this.state.item]
-        // })
-
+        // Clear the input
+        this.setState({
+            item: ''
+        });
     }
+
+    // Note: text is used instead of descrption cause of route!!!
 
     render()
     {

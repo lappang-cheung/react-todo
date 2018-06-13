@@ -29,3 +29,5 @@ If failed to use yarn then use the following:
 * `npm run install`
 * `npm run start`
 
+## Adding MongoDB Storage
+
