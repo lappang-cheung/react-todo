@@ -45,11 +45,19 @@ class App extends Component{
         3. Checks if remove item
     */
     onDeleteInput = (removeItem) => {
-        this.setState((prevState) =>({
-            itemList: prevState.itemList.filter((item) => {
-                return removeItem !== item
+        console.log(removeItem._id)
+        axios.delete(`/todo/${removeItem._id}`)
+            .then(res => {
+                console.log('Comment Deleted');
             })
-        })) 
+            .catch(err => {
+                console.log(err);
+            })
+        // this.setState((prevState) =>({
+        //     itemList: prevState.itemList.filter((item) => {
+        //         return removeItem !== item
+        //     })
+        // })) 
     }
 
     /*
@@ -58,12 +66,13 @@ class App extends Component{
     */
     onAddInput = () => {
 
+        axios.post(`/todo/${this.state.item}`, {description: this.state.item})
+            .then(res => console.log(res))
 
-        
-        this.setState({
-            item: '',
-            itemList: [...this.state.itemList, this.state.item]
-        })
+        // this.setState({
+        //     item: '',
+        //     itemList: [...this.state.itemList, this.state.item]
+        // })
     }
 
     render()

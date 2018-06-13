@@ -11,13 +11,13 @@ router.get('/test', (req,res) => res.json({msg: "To do works"}));
 // @route   POST api/todos
 // @desc    Create post
 // @access  Public
-router.post('/new', (req,res) => {
+router.post('/:todo', (req,res) => {
     const todo = new Todo({
         description: req.body.text
     });
 
     todo.save()
-        .then(todo => res.json(todo))
+        .then(todo => res.status(200).json(todo))
 });
 
 // @route   POST api/todos
