@@ -30,10 +30,28 @@ If failed to use yarn then use the following:
 
 ## Adding Local Storage
 
-Reason for adding local storage is when the browser refreshes, all the data will disappear and in order to prevent it.
+In order to install local storage we need to modify the App.js from:
 
-* `create-react-app` is a global command-line utility that you use to create new projects.
-* `react-scripts` is a development dependency in the generated projects (including this one).
+~~~~
+state = {
+        item: '',
+        itemList:[]
+    }
+
+onChange = (event) => {
+        this.setState({
+            item: event.target.value
+        })
+}
+
+onDeleteInput = (removeItem) => {
+    this.setState((prevState) =>({
+        itemList: prevState.itemList.filter((item) => {
+                return removeItem !== item
+        })
+    })) 
+}
+~~~~
 
 ## Adding componentDidUpdate
 
