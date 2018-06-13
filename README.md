@@ -36,7 +36,14 @@ If failed to use yarn then use the following:
 Need to create a backend server in order to communcation with MongoDB local
 
 1. Create a folder called "lib"
+
++-- lib
+
 2. Create a file called "server.js" inside the "lib" folder
+
++-- lib
+|   +-- server.js
+
 3. Yarn or npm install packages: axios, express, mongoose, nodemon and concurrently in terminal
 
 Yarn Installation
@@ -53,7 +60,7 @@ npm install --save axios express mongoose nodemon concurrently
 
 4. In "server.js" declare the variables, port and basic routes
 
-//server.js
+server.js - File
 ~~~~~
 const express = require('express');
 const PORT = process.env.PORT || 5000;
@@ -68,6 +75,67 @@ app.listen(PORT, () => {
     console.log('Listening to port: ${PORT}`)
 })
 ~~~~~
+
+5. Install body-parser for parsing the HTTP request body and mongoose for connect to MongoDB
+
+~~~~~
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser);
+
+const PORT = process.env.PORT || 5000;
+
+//Some code
+~~~~~
+
+6. Use the body-parser after creating the app instance
+
+~~~~~
+//Some code
+
+const app = express();
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+//Some code
+~~~~~
+
+7. Creating a folder called "config", then inside create a file called "keys.js" and declare the local mongo uri
+
++-- config
+|   +-- keys.js
+
+keys.js - File
+~~~~~
+module.exports = {
+    MONGO_URI: 'mongodb://localhost:27017/todoApp'
+}
+~~~~~
+
+8. Creating the MongoDB connection 
+
+server.js - File
+~~~~~
+//Some code
+
+const db = require('../config/keys').MONGO_URI;
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true}))
+
+mongoose
+    .connect(db)
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
+
+app.get('/', (req,res) => {
+    res.send('Hello world');
+})
+
+//Some code 
+~~~~~
+
 
 ## Adding MongoDB Storage
 
