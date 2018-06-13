@@ -37,12 +37,16 @@ Need to create a backend server in order to communcation with MongoDB local
 
 1. Create a folder called "lib"
 
+~~~~~
 +-- lib
+~~~~~
 
 2. Create a file called "server.js" inside the "lib" folder
 
+~~~~~
 +-- lib
 |   +-- server.js
+~~~~~
 
 3. Yarn or npm install packages: axios, express, mongoose, nodemon and concurrently in terminal
 
@@ -104,7 +108,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 7. Creating a folder called "config", then inside create a file called "keys.js" and declare the local mongo uri
 
 ~~~~~
-+-- _config
++-- config
 |   +-- _keys.js
 ~~~~~
 
