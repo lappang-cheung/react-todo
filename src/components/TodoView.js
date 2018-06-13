@@ -23,7 +23,8 @@ class TodoView extends Component {
                     className={this.state.active ? 'active' : 'notActive'}
                     onClick={this.onStrikeThrough}
                 >
-                    {this.props.item}
+                {/* Note: item.description is getting the value of the string */}
+                    {this.props.item.description}
                 </li>
                 {/* Button for removing task */}
                 <button onClick={(e) => {
