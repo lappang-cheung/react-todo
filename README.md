@@ -33,7 +33,24 @@ If failed to use yarn then use the following:
 
 ## Creating Backend Server
 
+Need to create a backend server in order to communcation with MongoDB local
 
+1. Create a folder called "lib"
+2. Create a file called "server.js" inside the "lib" folder
+3. Yarn or npm install packages: axios, express, mongoose, nodemon and concurrently in terminal
+
+Yarn Installation
+~~~~~
+yarn add axios express mongoose nodemon concurrently
+~~~~~
+
+or 
+
+NPM installation
+~~~~~
+npm install --save axios express mongoose nodemon concurrently
+~~~~~
+4. In "server.js" declare the variables, port and basic routes
 
 
 
