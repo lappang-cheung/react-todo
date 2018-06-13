@@ -216,6 +216,26 @@ render(){
 ~~~~
 
 5. Create a new state just for this class only as a boolean of false
+
+~~~~
+state = {
+        active: false
+    }
+~~~~
+
 6. Create the strike through method
-7. On the li element, check if the boolean value is true or false then apply a css class
-8. Add the strike through method to onClick  
+
+~~~~
+onStrikeThrough = () => {
+        this.setState({ active: !this.state.active })
+    }
+~~~~
+
+7. On the li element, check if the boolean value is true or false then apply a css class and onClick method of strikethrough
+
+~~~~
+<li key={this.props.index}
+    className={this.state.active ? 'active' : 'notActive'}
+    onClick={this.onStrikeThrough}
+>
+~~~~
