@@ -11,8 +11,6 @@ There are four version of this application:
 ## Table of Contents
 - [Installation of App](#installation-of-app)
 - [Creating Backend Server](#creating-backend-server)
-- [Adding MongoDB Storage](#adding-mongodb-storage)
-- [Creating A Model](#creating-a-model)
 - [Modifying componentDidMount](#adding-componentdidmount)
 - [Modifying Delete Task](#modifying-delete-task)
 - [Modifying Add Task](#modifiying-add-task)
@@ -223,6 +221,28 @@ outer.get('/', (req,res) => {
 module.exports = router;
 ~~~~
 
-## Adding MongoDB Storage
+13. Add in the keys, mongoose conecting to MongoDB and the routing for the "server.js"
+
+server.js - File
+~~~~
+//Some code
+
+const db = require('../config/keys').MONGO_URI;
+mongoose
+    .connect(db)
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
+
+//Some code
+
+app.get('/', (req,res) => {
+    res.send('Hello world');
+})
+app.use('/todo', todo);
+
+//Some code
+~~~~
+
+## Modifying componentDidMount
 
 Need to create the 
