@@ -1,5 +1,3 @@
-In progress
-
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 There are four version of this application:
@@ -14,6 +12,7 @@ There are four version of this application:
 - [Modifying componentDidMount](#modifying-componentdidmount)
 - [Modifying Delete Task](#modifying-delete-task)
 - [Modifying Add Task](#modifiying-add-task)
+- [Modifying Package Json](#modifying-package-json)
 
 ## Installation of App
 
@@ -346,5 +345,24 @@ onAddInput = () => {
     this.setState({
         item: ''
     });
+}
+~~~~~
+
+## Modifying Package Json
+
+Add the proxy for the backend and update the scripts
+
+~~~~~
+"proxy": "http://localhost:5000",
+
+// Some configs
+
+"scripts": {
+    "client": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server": "nodemon lib/server.js",
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
 }
 ~~~~~
