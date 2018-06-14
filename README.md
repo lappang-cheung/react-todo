@@ -11,7 +11,7 @@ There are four version of this application:
 ## Table of Contents
 - [Installation of App](#installation-of-app)
 - [Creating Backend Server](#creating-backend-server)
-- [Modifying componentDidMount](#adding-componentdidmount)
+- [Modifying componentDidMount](#modifying-componentdidmount)
 - [Modifying Delete Task](#modifying-delete-task)
 - [Modifying Add Task](#modifiying-add-task)
 
@@ -288,3 +288,38 @@ componentDidUpdate(){
     localStorage.setItem('itemList', json);
 }
 ~~~~~
+
+## Modifying Delete Task
+
+Remove the local storage of adding and implementing the axios route calls
+
+~~~~~
+onAddInput = () => {
+    this.setState({
+        item: '',
+        itemList: [...this.state.itemList, this.state.item]
+    })
+}
+~~~~~
+
+to 
+
+~~~~~
+onAddInput = () => {
+    axios.post('todo/new', {
+        text: this.state.item
+    })
+    .then(
+        res => console.log(res)
+    )
+    .catch(err => console.log(err));
+
+    this.refresh();
+        
+    this.setState({
+        item: ''
+    });
+}
+~~~~~
+
+## Modifying Add Task
