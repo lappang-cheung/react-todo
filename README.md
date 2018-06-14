@@ -11,7 +11,7 @@ There are four version of this application:
 - [Creating Backend Server](#creating-backend-server)
 - [Modifying componentDidMount](#modifying-componentdidmount)
 - [Modifying Delete Task](#modifying-delete-task)
-- [Modifying Add Task](#modifiying-add-task)
+- [Modifying Add Task](#modifying-add-task)
 - [Modifying Package Json](#modifying-package-json)
 
 ## Installation of App
