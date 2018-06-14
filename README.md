@@ -245,4 +245,46 @@ app.use('/todo', todo);
 
 ## Modifying componentDidMount
 
-Need to create the 
+Remove the logic for local storage and need to implement axios get
+
+~~~~~
+componentDidMount(){
+    try{
+        const json = localStorage.getItem('itemList');
+
+        const itemList = JSON.parse(json);
+
+        if(itemList){
+            this.setState({itemList})
+        }
+    }catch(e){
+        // Do nothing
+    }
+ }
+~~~~~
+
+to 
+
+~~~~~
+refresh = () => {
+    axios.get("/todo")
+        .then(res => {      
+            this.setState({
+                itemList: res.data
+        })
+    })
+}
+
+componentDidMount(){
+        this.refresh()
+}
+~~~~~
+
+Delete
+
+~~~~~
+componentDidUpdate(){
+    const json = JSON.stringify(this.state.itemList);
+    localStorage.setItem('itemList', json);
+}
+~~~~~
