@@ -294,6 +294,33 @@ componentDidUpdate(){
 Remove the local storage of adding and implementing the axios route calls
 
 ~~~~~
+this.setState((prevState) =>({
+    itemList: prevState.itemList.filter((item) => {
+        return removeItem !== item
+    })
+    })) 
+~~~~~
+
+to 
+
+~~~~~
+axios
+    .delete(`/todo/${removeItem._id}`)
+        .then(res => {
+            console.log('Comment Deleted');
+            this.refresh();
+        })
+        .catch(err => {
+            console.log(err);
+        }
+    )
+~~~~~
+
+## Modifying Add Task
+
+Remove the local storage of adding and implementing the axios route calls
+
+~~~~~
 onAddInput = () => {
     this.setState({
         item: '',
@@ -321,5 +348,3 @@ onAddInput = () => {
     });
 }
 ~~~~~
-
-## Modifying Add Task
