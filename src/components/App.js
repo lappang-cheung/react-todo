@@ -2,19 +2,24 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 // Custom classes
-import Counter from './Counter';
-import Todo from './Todo';
-import TodoList from './TodoList';
+import Counter from './task/Counter';
+import Todo from './task/Todo';
+import TodoList from './task/TodoList';
 
 // Custom styles
 import '../styles/App.css';
+import Login from './login/Login';
+import Signup from './login/Signup';
 
 class App extends Component{
 
     // New way without writing out super and constructor
     state = {
         item: '',
-        itemList:[]
+        itemList:[],
+        email: '',
+        password: '',
+        userLogin: false
     }
 
     refresh = () =>{
@@ -40,6 +45,18 @@ class App extends Component{
     onChange = (event) => {
         this.setState({
             item: event.target.value
+        })
+    }
+
+    onChangeEmail = (event) =>{
+        this.setState({
+            email: event.target.value
+        })
+    }
+
+    onChangePassword = (event) => {
+        this.setState({
+            password: event.target.value
         })
     }
 
@@ -87,12 +104,57 @@ class App extends Component{
         });
     }
 
+    onSignup = () => {
+        axios.post('user/signup', {
+            email: this.state.email,
+            password: this.state.password
+        })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+
+        this.setState({
+            userLogin: !this.userLogin,
+            email: '',
+            password: ''
+        })
+    }
+
+    onLogin = () => {
+        axios.post('user/login',{
+            email: this.state.email,
+            password: this.state.password
+        })
+        .then(
+            res => console.log(res)
+        ).catch(err => console.log(err));
+
+        this.setState({
+            userLogin: !this.userLogin,
+            email: '',
+            password: ''
+        })
+    }
+
     // Note: text is used instead of descrption cause of route!!!
 
     render()
     {
         return(
             <div>
+                <Signup 
+                    email={this.state.email}
+                    password={this.state.password}
+                    onChangeEmail={this.onChangeEmail}
+                    onChangePassword={this.onChangePassword}
+                    onSignup={this.onSignup}
+                />
+                <Login 
+                    email={this.state.email}
+                    password={this.state.password}
+                    onChangeEmail={this.onChangeEmail}
+                    onChangePassword={this.onChangePassword}
+                    onLogin={this.onLogin}
+                />
                 {/* Todo component to add input into the array */}
                 <Todo
                     item={this.state.item}
