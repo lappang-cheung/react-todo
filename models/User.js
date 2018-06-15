@@ -3,30 +3,22 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    passwordConfirm:{
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true
     },
-    date: {
+    password:{
+        type: String,
+        required: true
+    },
+    isDeleted:{
+        type: Boolean,
+        default: false
+    },
+    signUpDate: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     }
 });
 
-module.exports = Todo = mongoose.model('user', UserSchema);
+module.exports = User = mongoose.model('user', UserSchema);
