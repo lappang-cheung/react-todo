@@ -3,12 +3,12 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../../models/User');
 
-// @route   GET api/todos/test
-// @desc    Test todos route
+// @route   GET /uaer/test
+// @desc    Test user route
 // @access  Public
 router.get('/test', (req,res) => res.json({msg: "Users works"}));
 
-// @route   POST api/user/signup
+// @route   POST /user/signup
 // @desc    Create user
 // @access  Public
 router.post('/signup', (req,res) => {
@@ -30,7 +30,7 @@ router.post('/signup', (req,res) => {
 
 });
 
-// @route   POST api/user/user
+// @route   POST /user/login
 // @desc    login user
 // @access  Public
 router.post('/login', (req,res) => {
@@ -40,6 +40,7 @@ router.post('/login', (req,res) => {
             if(user){
                 if(user.password === req.body.password){
                     return res.status(200).json({ msg: 'User has login'})
+                    res.redirect('../../todo/')
                 }else{
                     return res.status(401).json({ msg: 'Unauthorized access'})
                 }
