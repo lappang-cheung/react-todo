@@ -38,7 +38,11 @@ router.post('/login', (req,res) => {
     User.findOne({email: req.body.email})
         .then(user => {
             if(user){
-                return res.status(200).json({ msg: 'Email found'})
+                if(user.password === req.body.password){
+                    return res.status(200).json({ msg: 'User has login'})
+                }else{
+                    return res.status(401).json({ msg: 'Unauthorized access'})
+                }
             }else{
                 return res.status(400).json({ msg: 'Email not found'})
             }
