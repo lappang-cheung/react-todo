@@ -8,6 +8,8 @@ There are four version of this application:
 - [Installation of App](#installation-of-app)
 - [Challenges of User Auth](#challenges-of-user-auth)
 - [Restructuring Backend Server Folder](#restructuring-backend-server-folder)
+- [Adding and Modifying Models](#adding-and-modifying-models)
+- [Adding and Modifying Routes](#adding-and-modifying-routes)
 
 ## Installation of App
 
@@ -37,6 +39,7 @@ and it wasn't issue because there was no issue association. However due to the u
 had to be modified to make the task match the current user and then displayed the task.
 
 ## Restructuring Backend Server Folder
+
 
 In the previous iteration of the mongo storage version:
 
@@ -88,3 +91,93 @@ Will be modified into this folder structure
 ~~~~~
 
 The reasoning for this folder restructuring is simplicity and able to sort our logic for specific functions
+
+## Adding and Modifying Models
+
+In the model folder, create a new model called "User.js" and create basic require enities:
+
+User.js - Model
+~~~~
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+// Create Schema
+const UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+module.exports = User = mongoose.model('users', UserSchema);
+~~~~
+
+And then modify & Rename the "Todo.js" to "Task.js" with the modification code to:
+
+Todo.js - Model
+~~~~
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+// Create Schema
+const TodoSchema = new Schema({
+    description: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+module.exports = Todo = mongoose.model('todo', TodoSchema);
+~~~~
+
+to
+
+Task.js - Model
+~~~~
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const taskSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    },
+    title:{
+        type: String,
+        required: true
+    },
+    
+    description:{
+        type: String,
+        required: true
+    },
+    date:{
+        type: Date,
+        default: new Date()
+    }
+})
+
+module.exports = Task = mongoose.model('tasks', taskSchema)
+~~~~
+
+Note: Title has been added and as well as the user reference by id whom create the task
+
+## Adding and Modifying Routes
+
+In the routes folder, create a 
