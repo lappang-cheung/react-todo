@@ -10,6 +10,8 @@ There are four version of this application:
 - [Restructuring Backend Server Folder](#restructuring-backend-server-folder)
 - [Adding and Modifying Models](#adding-and-modifying-models)
 - [Adding and Modifying Routes](#adding-and-modifying-routes)
+- [Adding and Modifying Config](#adding-and-modifying-config)
+- [Implementing Passport into Routes](#implementing-passport-into-routes)
 
 ## Installation of App
 
@@ -274,3 +276,66 @@ module.exports = router
 ~~~~
 
 Note: Import the model both User and Task because in order to create a task, the user must be validated
+
+## Adding and Modifying Config
+
+In the config folder, open up "keys.js" and add the new entity for the secret key
+
+keys.js - configs
+~~~~
+module.exports =
+{
+    mongoURI: 'mongodb://localhost:27017/todo'
+}
+~~~~
+
+to
+
+keys.js - configs
+~~~~
+module.exports =
+{
+    mongoURI: 'mongodb://localhost:27017/todo',
+    secretOrKey: 'secret'
+}
+~~~~
+
+Now using passport to verify our authenication and import the following classes:
+passport-jwt - npm
+mongoose - npm
+
+Then create a file called "passport.js" with the following code
+
+passport.js - configs
+~~~~
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
+const mongoose = require('mongoose')
+
+const User = mongoose.model('users')
+const keys = require('../configs/keys')
+
+const opts = {};
+
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = keys.secretOrKey;
+
+module.exports = passport => {
+    passport.use(new JwtStrategy(opts, (jwt_payload,done) => {
+        User.findById(jwt_payload.id)
+            .then(user => {
+                if(user){
+                    return done(null, user)
+                }
+                return done(null, false)
+            })
+            .catch(err => console.log(err))
+    }));
+};
+~~~~
+
+From the passport documentation, a Jwt Strategy is needed for extracting the token and
+this particular code uses the secret key to decode the token.
+
+## Implementing Passport into Routes
+
