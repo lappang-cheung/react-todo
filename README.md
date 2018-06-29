@@ -180,4 +180,97 @@ Note: Title has been added and as well as the user reference by id whom create t
 
 ## Adding and Modifying Routes
 
-In the routes folder, create a 
+In the model folder, create a new model called "users.js" and this create the routes for API calls for the frontend
+
+users.js - Routes
+~~~~
+const express = require('express')
+const router = express.Router()
+
+const keys = require('../configs/keys')
+
+const User = require('../models/User')
+
+router.get('/test', async (req,res,next) => {
+    try{
+        const docs = await {message: 'User routing test'}
+        res.status(200).send(docs)
+    }catch(e){
+        next(e)
+    }
+});
+
+module.exports = router
+~~~~
+
+Note: Import the keys & User model, declare the const route from express in order to do the routing
+
+Now modified and rename the "todo.js" to "tasks.js" with similar structure to "users.js"
+
+todo.js - Route
+~~~~
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const Todo = require('../../models/Todo');
+
+
+router.get('/test', (req,res) => res.json({msg: "To do works"}));
+
+router.post('/new', (req,res) => {
+    console.log(req.body)
+    const todo = new Todo({
+        description: req.body.text
+    });
+
+    todo.save()
+        .then(todo => res.status(200).json(todo))
+});
+
+
+router.delete('/:id', (req,res) => {
+    Todo.findById(req.params.id)
+        .then(todo => {
+            todo.remove().then(() => res.json({
+                success: true
+            }))
+            .catch(err => res.status(404).json({todonotfound: 'Task item not found'}))
+        })
+})
+
+router.get('/', (req,res) => {
+    Todo.find()
+        .sort({date: -1})
+        .then(todos => res.json(todos))
+        .catch(err => res.status(404).json({
+            notodofound: 'No task items found'
+        }));
+});
+
+module.exports = router;
+~~~~
+
+to 
+
+tasks.js - Route
+~~~~
+const express = require('express')
+const router = express.Router()
+const mongoose = require('mongoose')
+
+const Task = require('../models/Task')
+const User = require('../models/User')
+
+router.get('/test', async (req,res,next) => {
+    try{
+        const docs = await {message: 'Task routing test'}
+        res.status(200).send(docs)
+    }catch(e){
+        next(e)
+    }
+})
+
+module.exports = router
+~~~~
+
+Note: Import the model both User and Task because in order to create a task, the user must be validated
