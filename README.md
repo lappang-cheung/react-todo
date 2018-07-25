@@ -14,6 +14,7 @@ There are four version of this application:
 - [Adding and Modifying Routes](#adding-and-modifying-routes)
 - [Adding and Modifying Config](#adding-and-modifying-config)
 - [Implementing Passport into Routes](#implementing-passport-into-routes)
+- [Deploying to Heroku](#deployingtoheroku)
 
 ## Installation of App
 
@@ -435,3 +436,11 @@ router.post('/login', (req,res) => {
         })
 });
 ~~~~
+
+## Deploying to Heroku
+
+In order to deploy the Heroku environment, here are the list of things which needs to be done:
+
+1. Heroku account (Register and etc)
+2. Update the package.json script to make sure the front has a "build" folder
+3. Push all the changes after commiting to heroku
