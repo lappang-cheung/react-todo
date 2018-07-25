@@ -7,8 +7,6 @@
     "client-install": "npm run install --prefix client",
     "server": "nodemon lib/server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE cd client && npm install && npm install && npm run build",
-
-    
     "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "start": "nodemon lib/server.js"
   },

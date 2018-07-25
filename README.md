@@ -444,3 +444,41 @@ In order to deploy the Heroku environment, here are the list of things which nee
 1. Heroku account (Register and etc)
 2. Update the package.json script to make sure the front has a "build" folder
 3. Push all the changes after commiting to heroku
+
+Once you completed the first step, then go "server.js" and add in the condition for checking the environment if is production
+
+server.js - lib Folder
+~~~~
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false}))
+
+app.use('/users', require('./routes/users'))
+app.use('/tasks', require('./routes/tasks'))
+
+// Check for production for Heroku
+if(process.env.NODE_ENV === 'production'){
+    // Load static folder
+    app.use(express.static('client/build'))
+    app.get('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
+~~~~
+
+Updated the scripts
+
+package.json
+~~~~
+"scripts": {
+    "client-install": "npm run install --prefix client",
+    "server": "nodemon lib/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE cd client && npm install && npm install && npm run build",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "start": "nodemon lib/server.js"
+}
+~~~~
+
+Finally commit the changes onto github and push heroku into using the following commands:
+1. Heroku create            (might need to login if using the heroku cli)
+2. Git push heroku master   (pushes the build ot the heroku server)
+3. Heroku open              (open the app in the browser)
